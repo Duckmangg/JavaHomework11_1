@@ -19,7 +19,13 @@ public class CartManager {
     public PurchaseItem[] findAll() { return items; }
     public PurchaseItem[] findLast(){
         PurchaseItem[] items = findAll();
-        PurchaseItem[] result = new PurchaseItem[items.length];
+        int resultLength;
+        if (items.length < 10){
+            resultLength = items.length;
+        }else {
+            resultLength = 10;
+        }
+        PurchaseItem[] result = new PurchaseItem[resultLength];
         if (items.length < 10){
             for (int i = 0; i < result.length; i++) {
                 int index = items.length - i - 1;
@@ -27,7 +33,7 @@ public class CartManager {
             }
         } else{
             for (int i = 0; i < 10; i++) {
-                int index = 10 - i - 1;
+                int index = items.length - i - 1;
                 result[i] = items[index];
             }
         }
@@ -35,7 +41,13 @@ public class CartManager {
     }
     public PurchaseItem[] findLast(int numberOfRecent){
         PurchaseItem[] items = findAll();
-        PurchaseItem[] result = new PurchaseItem[items.length];
+        int resultLength;
+        if (items.length < numberOfRecent){
+            resultLength = items.length;
+        }else {
+            resultLength = numberOfRecent;
+        }
+        PurchaseItem[] result = new PurchaseItem[resultLength];
         if (items.length < numberOfRecent){
             for (int i = 0; i < result.length; i++) {
                 int index = items.length - i - 1;
@@ -43,7 +55,7 @@ public class CartManager {
             }
         } else{
             for (int i = 0; i < numberOfRecent; i++) {
-                int index = numberOfRecent - i - 1;
+                int index = items.length - i - 1;
                 result[i] = items[index];
             }
         }
