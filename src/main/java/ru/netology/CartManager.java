@@ -1,11 +1,13 @@
 package ru.netology;
+
 import ru.netology.domain.PurchaseItem;
 
 
 public class CartManager {
 
     private PurchaseItem[] items = new PurchaseItem[0];
-    public void add(PurchaseItem item){
+
+    public void add(PurchaseItem item) {
 
         int length = items.length + 1;
         PurchaseItem[] tmp = new PurchaseItem[length];
@@ -16,22 +18,26 @@ public class CartManager {
         items = tmp;
 
     }
-    public PurchaseItem[] findAll() { return items; }
-    public PurchaseItem[] findLast(){
+
+    public PurchaseItem[] findAll() {
+        return items;
+    }
+
+    public PurchaseItem[] findLast() {
         PurchaseItem[] items = findAll();
         int resultLength;
-        if (items.length < 10){
+        if (items.length < 10) {
             resultLength = items.length;
-        }else {
+        } else {
             resultLength = 10;
         }
         PurchaseItem[] result = new PurchaseItem[resultLength];
-        if (items.length < 10){
+        if (items.length < 10) {
             for (int i = 0; i < result.length; i++) {
                 int index = items.length - i - 1;
                 result[i] = items[index];
             }
-        } else{
+        } else {
             for (int i = 0; i < 10; i++) {
                 int index = items.length - i - 1;
                 result[i] = items[index];
@@ -39,21 +45,22 @@ public class CartManager {
         }
         return result;
     }
-    public PurchaseItem[] findLast(int numberOfRecent){
+
+    public PurchaseItem[] findLast(int numberOfRecent) {
         PurchaseItem[] items = findAll();
         int resultLength;
-        if (items.length < numberOfRecent){
+        if (items.length < numberOfRecent) {
             resultLength = items.length;
-        }else {
+        } else {
             resultLength = numberOfRecent;
         }
         PurchaseItem[] result = new PurchaseItem[resultLength];
-        if (items.length < numberOfRecent){
+        if (items.length < numberOfRecent) {
             for (int i = 0; i < result.length; i++) {
                 int index = items.length - i - 1;
                 result[i] = items[index];
             }
-        } else{
+        } else {
             for (int i = 0; i < numberOfRecent; i++) {
                 int index = items.length - i - 1;
                 result[i] = items[index];
