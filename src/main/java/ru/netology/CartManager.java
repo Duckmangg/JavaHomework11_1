@@ -1,16 +1,25 @@
 package ru.netology;
 
-import ru.netology.domain.PurchaseItem;
+import ru.netology.domain.PurchasedItem;
 
 
 public class CartManager {
 
-    private PurchaseItem[] items = new PurchaseItem[0];
+    private PurchasedItem[] items = new PurchasedItem[0];
+    private int itemLimit;
 
-    public void add(PurchaseItem item) {
+    public CartManager(int itemLimit) {
+        this.itemLimit = itemLimit;
+    }
+
+    public CartManager() {
+        this.itemLimit = 10;
+    }
+
+    public void add(PurchasedItem item) {
 
         int length = items.length + 1;
-        PurchaseItem[] tmp = new PurchaseItem[length];
+        PurchasedItem[] tmp = new PurchasedItem[length];
 
         System.arraycopy(items, 0, tmp, 0, items.length);
         int lastIndex = tmp.length - 1;
@@ -19,26 +28,21 @@ public class CartManager {
 
     }
 
-    public PurchaseItem[] findAll() {
+    public PurchasedItem[] findAll() {
         return items;
     }
 
-    public PurchaseItem[] findLast() {
-        PurchaseItem[] items = findAll();
-        int resultLength;
-        if (items.length < 10) {
-            resultLength = items.length;
-        } else {
-            resultLength = 10;
-        }
-        PurchaseItem[] result = new PurchaseItem[resultLength];
-        if (items.length < 10) {
+    public PurchasedItem[] findLast() {
+        PurchasedItem[] items = findAll();
+        int resultLength = Math.min(items.length, itemLimit);
+        PurchasedItem[] result = new PurchasedItem[resultLength];
+        if (items.length < itemLimit) {
             for (int i = 0; i < result.length; i++) {
                 int index = items.length - i - 1;
                 result[i] = items[index];
             }
         } else {
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < itemLimit; i++) {
                 int index = items.length - i - 1;
                 result[i] = items[index];
             }
@@ -46,15 +50,15 @@ public class CartManager {
         return result;
     }
 
-    public PurchaseItem[] findLast(int numberOfRecent) {
-        PurchaseItem[] items = findAll();
+   /* public PurchasedItem[] findLast(int numberOfRecent) {
+        PurchasedItem[] items = findAll();
         int resultLength;
         if (items.length < numberOfRecent) {
             resultLength = items.length;
         } else {
             resultLength = numberOfRecent;
         }
-        PurchaseItem[] result = new PurchaseItem[resultLength];
+        PurchasedItem[] result = new PurchasedItem[resultLength];
         if (items.length < numberOfRecent) {
             for (int i = 0; i < result.length; i++) {
                 int index = items.length - i - 1;
@@ -67,5 +71,5 @@ public class CartManager {
             }
         }
         return result;
-    }
+    }*/
 }
